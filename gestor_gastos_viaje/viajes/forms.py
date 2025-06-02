@@ -1,4 +1,3 @@
-# viajes/forms.py
 
 from django import forms
 from .models.Gasto import Gasto
@@ -11,7 +10,11 @@ class RegistrarGastoForm(forms.ModelForm):
         model = Gasto
         fields = ['viaje', 'fecha', 'valor_original', 'metodo_pago', 'tipo_gasto']
         widgets = {
-            'fecha': forms.DateInput(attrs={'type': 'date'}),
+            'fecha': forms.DateInput(attrs={'type': 'date', 'placeholder': 'Selecciona la fecha'}),
+            'valor_original': forms.NumberInput(attrs={'placeholder': 'Valor del gasto'}),
+            'viaje': forms.Select(attrs={'placeholder': 'Selecciona el viaje'}),
+            'metodo_pago': forms.Select(attrs={'placeholder': 'Método de pago'}),
+            'tipo_gasto': forms.Select(attrs={'placeholder': 'Tipo de gasto'}),
         }
 
     def clean(self):
@@ -19,11 +22,9 @@ class RegistrarGastoForm(forms.ModelForm):
         viaje = cleaned_data.get('viaje')
         fecha = cleaned_data.get('fecha')
 
-        # Validar que el viaje esté activo
         if viaje and not viaje.esta_activo():
             self.add_error('viaje', 'No se pueden registrar gastos en un viaje que no está activo.')
 
-        # Validar que la fecha del gasto esté dentro del rango del viaje
         if viaje and fecha:
             if fecha < viaje.fecha_inicio or fecha > viaje.fecha_fin:
                 self.add_error('fecha', 'La fecha del gasto debe estar dentro del rango del viaje.')
@@ -34,8 +35,11 @@ class RegistrarViajeForm(forms.ModelForm):
         model = Viaje
         fields = ['nombre','fecha_inicio', 'fecha_fin', 'presupuesto_diario', 'moneda']
         widgets = {
-            'fecha_inicio': forms.DateInput(attrs={'type': 'date'}),
-            'fecha_fin': forms.DateInput(attrs={'type': 'date'}),
+            'nombre': forms.TextInput(attrs={'placeholder': 'Nombre del viaje o ciudad de destino'}),
+            'fecha_inicio': forms.DateInput(attrs={'type': 'date', 'placeholder': 'Fecha de inicio'}),
+            'fecha_fin': forms.DateInput(attrs={'type': 'date', 'placeholder': 'Fecha de fin'}),
+            'presupuesto_diario': forms.NumberInput(attrs={'placeholder': 'Presupuesto diario en tu moneda'}),
+            'moneda': forms.TextInput(attrs={'placeholder': 'Ej: COP, USD'}),
         }
         
     def clean(self):

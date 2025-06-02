@@ -1,6 +1,8 @@
 from ..models.Viaje import Viaje
 from ..models.Gasto import Gasto
 from ..services.ConversorMoneda import ConversorMoneda
+from collections import defaultdict
+
 
 class ControlViaje:
 
@@ -25,6 +27,25 @@ class ControlViaje:
             tipo_gasto=tipo_gasto,
         )
         return gasto
+
+    @staticmethod
+    def reporte_gastos_por_dia(gastos):
+        gastos_por_dia = defaultdict(lambda: {'Efectivo': 0, 'Tarjeta': 0, 'Total': 0})
+        for gasto in gastos:
+            metodo = 'Efectivo' if 'efectivo' in gasto.metodo_pago.nombre.lower() else 'Tarjeta'
+            gastos_por_dia[gasto.fecha][metodo] += gasto.valor_en_pesos
+            gastos_por_dia[gasto.fecha]['Total'] += gasto.valor_en_pesos
+        return dict(gastos_por_dia)
+
+    @staticmethod
+    def reporte_gastos_por_tipo(gastos):
+        gastos_por_tipo = defaultdict(lambda: {'Efectivo': 0, 'Tarjeta': 0, 'Total': 0})
+        for gasto in gastos:
+            metodo = 'Efectivo' if 'efectivo' in gasto.metodo_pago.nombre.lower() else 'Tarjeta'
+            tipo = gasto.tipo_gasto.nombre
+            gastos_por_tipo[tipo][metodo] += gasto.valor_en_pesos
+            gastos_por_tipo[tipo]['Total'] += gasto.valor_en_pesos
+        return dict(gastos_por_tipo)
 
     @staticmethod
     def diferencia_presupuesto_diario(viaje: Viaje, fecha):
