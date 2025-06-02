@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Detalle de Viaje</title>
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}" />
+  </head>
+  <body>
+    <div class="contenedor-formulario">
+      <h1>{{ viaje.nombre }}</h1>
+
+      <p>
+        <strong>Fechas:</strong> {{ viaje.fecha_inicio }} - {{ viaje.fecha_fin }}
+      </p>
+      <p>
+        <strong>Presupuesto diario:</strong> {{ viaje.presupuesto_diario }} {{ viaje.moneda }}
+      </p>
+
+
+      <h4>Gastos</h4>
+      <ul>
+        {% for gasto in gastos %}
+        <li>
+          {{ gasto.fecha }} - {{ gasto.valor_original }} {{ viaje.moneda }} 
+          ({{ gasto.valor_en_pesos }} COP) - {{ gasto.metodo_pago }} - {{ gasto.tipo_gasto }}
+        </li>
+        {% empty %}
+        <li>No hay gastos registrados para este viaje.</li>
+        {% endfor %}
+      </ul>
+
+      <div class="acciones"> 
+        <a href="{% url 'lista_viajes' %}">Volver a la lista de viajes</a>
+        <a href="{% url 'registrar_gasto' viaje.id %}">Agregar gasto</a>
+      </div>
+
+    </div>
+  </body>
+</html>

@@ -73,3 +73,42 @@ h1 {
   color: #b00020;
   margin-bottom: 10px;
 }
+
+.diferencia {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 4px;
+  background: #f0f4ff;
+  color: #0056b3;
+  font-weight: bold;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  padding: 5px 10px;
+  transition: color 0.3s, border-color 0.3s;
+  margin-top: 10px;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding-left: 0;
+}
+
+.viaje-item {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.control-viajes {
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  margin-top: 20px;
+}
