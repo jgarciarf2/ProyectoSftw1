@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Registrar Viaje</title>
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}" />
+  </head>
+  <body>
+    <div class="contenedor-formulario">
+      <h1>Registrar un nuevo viaje</h1>
+      <form method="post" class="formulario-gasto">
+        {% csrf_token %} {% for field in form %}
+        <div class="campo-formulario">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }} {% if field.errors %}
+          <div class="error">{{ field.errors }}</div>
+          {% endif %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="boton">Registrar</button>
+      </form>
+    </div>
+  </body>
+</html>

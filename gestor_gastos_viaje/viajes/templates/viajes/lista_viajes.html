@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lista de Viajes y Gastos</title>
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}" />
+  </head>
+  <body>
+    <div class="contenedor-formulario">
+      <h1>Viajes</h1>
+      {% for viaje in viajes %}
+      <div class="viaje">
+        <h4>
+          {{ viaje.nombre }} ({{ viaje.fecha_inicio }} - {{ viaje.fecha_fin }})
+        </h4>
+        <ul>
+          {% for gasto in viaje.gastos.all %}
+          <li>
+            {{ gasto.fecha }} - {{ gasto.valor_original }} {{ viaje.moneda }}
+            ({{ gasto.valor_en_pesos }} COP) - {{ gasto.metodo_pago }} - {{
+            gasto.tipo_gasto }}
+          </li>
+          {% empty %}
+          <li>No hay gastos registrados para este viaje.</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% empty %}
+      <p>No hay viajes registrados.</p>
+      {% endfor %}
+    </div>
+  </body>
+</html>

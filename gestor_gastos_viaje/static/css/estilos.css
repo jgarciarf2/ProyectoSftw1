@@ -1,0 +1,75 @@
+/* static/css/estilos.css */
+
+/* Estilos generales */
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Contenedor del formulario */
+.contenedor-formulario {
+  max-width: 600px;
+  margin: 0 auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.campo-formulario {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+/* Títulos */
+h1 {
+  color: #007bff;
+  text-align: center;
+}
+
+/* Campos del formulario */
+.campo-formulario {
+  margin-bottom: 15px;
+}
+
+.campo-formulario label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.campo-formulario input,
+.campo-formulario select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Botón */
+.boton {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.boton:hover {
+  background-color: #0056b3;
+}
+
+.errorlist,
+.error {
+  color: #b00020;
+  margin-bottom: 10px;
+}

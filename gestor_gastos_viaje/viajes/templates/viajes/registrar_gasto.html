@@ -1,0 +1,36 @@
+{% load static %}
+<!-- ¡Importante! Debe ir al inicio del archivo -->
+
+<!DOCTYPE html><!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Registrar Gasto</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}" />
+  </head>
+
+  <body>
+    <div class="contenedor-formulario">
+      <h1>Registrar un nuevo gasto</h1>
+      <form method="post" class="formulario-gasto">
+        {% csrf_token %} {% for field in form %}
+        <div class="campo-formulario">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }} {% if field.errors %}
+          <div class="error">{{ field.errors }}</div>
+          {% endif %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="boton">Registrar</button>
+      </form>
+      {% if mensaje %}
+      <p><strong>{{ mensaje }}</strong></p>
+      {% endif %}
+    </div>
+  </body>
+</html>
