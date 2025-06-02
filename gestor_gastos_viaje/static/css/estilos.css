@@ -1,9 +1,5 @@
-/* static/css/estilos.css */
-
-/* Estilos generales */
 body {
   font-family: "Arial", sans-serif;
-  /* background-image: url("https://images.pexels.com/photos/2559941/pexels-photo-2559941.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"); */
   background-image: url("../img/background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
@@ -13,7 +9,6 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-/* Contenedor del formulario */
 .contenedor-formulario {
   max-width: 600px;
   margin: 0 auto;
@@ -21,9 +16,9 @@ body {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  max-height: 80vh; /* Limita la altura al 80% de la ventana */
+  max-height: 80vh;
   overflow-y: auto;
-  scrollbar-width: thin; /* Firefox */
+  scrollbar-width: thin;
   scrollbar-color: #007bff #f0f4ff;
 }
 
@@ -51,13 +46,11 @@ body {
   margin-bottom: 15px;
 }
 
-/* Títulos */
 h1 {
   color: #007bff;
   text-align: center;
 }
 
-/* Campos del formulario */
 .campo-formulario {
   margin-bottom: 15px;
 }
@@ -77,7 +70,6 @@ h1 {
   border-radius: 4px;
 }
 
-/* Botón */
 .boton {
   background-color: #007bff;
   color: white;
@@ -152,7 +144,6 @@ ol {
   gap: 10px;
 }
 
-/* Tarjetas de gastos */
 .gastos-lista {
   display: flex;
   flex-direction: column;
@@ -195,7 +186,6 @@ ol {
   color: #888;
 }
 
-/* Tablas de reporte */
 .reporte {
   width: 100%;
   border-collapse: collapse;
@@ -223,7 +213,6 @@ ol {
   background: #f4faff;
 }
 
-/* Botones de acción */
 .acciones {
   margin-top: 30px;
   display: flex;
