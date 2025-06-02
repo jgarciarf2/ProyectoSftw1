@@ -26,10 +26,25 @@
           {% endif %}
         </div>
         {% endfor %}
-        <button type="submit" class="boton">Registrar</button>
+        <div class="botones-control">
+          <button type="submit" class="boton boton-volver">Registrar</button>
+          <a class="boton boton-volver" href="{% url 'lista_viajes' %}"
+            >Volver a viajes</a
+          >
+        </div>
       </form>
       {% if mensaje %}
       <p><strong>{{ mensaje }}</strong></p>
+      {% endif %} {% if diferencia is not None %}
+
+      <div class="diferencia">
+        Presupuesto restante:
+        <strong>
+          {{ diferencia }} COP {% if diferencia > 0 %} (¡Vas bien!) 
+          {% elif diferencia == 0 %} - ¡Justo en el presupuesto! {% else %} - ¡Te
+          pasaste del presupuesto! {% endif %}
+        </strong>
+      </div>
       {% endif %}
     </div>
   </body>

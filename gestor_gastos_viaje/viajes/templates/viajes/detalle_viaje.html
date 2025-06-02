@@ -17,24 +17,78 @@
         <strong>Presupuesto diario:</strong> {{ viaje.presupuesto_diario }} {{ viaje.moneda }}
       </p>
 
-
-      <h4>Gastos</h4>
-      <ul>
+      <h3 style="color: #007bff; margin-top: 30px margin-bottom: -20px">
+        Gastos del viaje
+      </h3>
+      <div class="gastos-lista">
         {% for gasto in gastos %}
-        <li>
-          {{ gasto.fecha }} - {{ gasto.valor_original }} {{ viaje.moneda }} 
-          ({{ gasto.valor_en_pesos }} COP) - {{ gasto.metodo_pago }} - {{ gasto.tipo_gasto }}
-        </li>
+        <div class="gasto-card">
+          <div class="gasto-fecha">
+            <strong>{{ gasto.fecha|date:"d M Y" }}</strong>
+          </div>
+          <div class="gasto-descripcion">
+            {{ gasto.tipo_gasto }} — {{ gasto.valor_original }} {{ viaje.moneda }}
+            <span class="gasto-cop">({{ gasto.valor_en_pesos }} COP)</span>
+          </div>
+          <div class="gasto-metodo">
+            <span>Método: {{ gasto.metodo_pago }}</span>
+          </div>
+        </div>
         {% empty %}
-        <li>No hay gastos registrados para este viaje.</li>
+        <div class="gasto-card gasto-vacio">
+          No hay gastos registrados para este viaje.
+        </div>
         {% endfor %}
-      </ul>
-
-      <div class="acciones"> 
-        <a href="{% url 'lista_viajes' %}">Volver a la lista de viajes</a>
-        <a href="{% url 'registrar_gasto' viaje.id %}">Agregar gasto</a>
       </div>
 
+      <!-- Reporte por día -->
+      <h3 style="color: #007bff; margin-top: 30px">Reporte por día</h3>
+      <table class="reporte">
+        <tr>
+          <th>Fecha</th>
+          <th>Efectivo (COP)</th>
+          <th>Tarjeta (COP)</th>
+          <th>Total (COP)</th>
+        </tr>
+        {% for fecha, valores in gastos_por_dia.items %}
+        <tr>
+          <td>{{ fecha }}</td>
+          <td>{{ valores.Efectivo|floatformat:0 }}</td>
+          <td>{{ valores.Tarjeta|floatformat:0 }}</td>
+          <td>{{ valores.Total|floatformat:0 }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+
+      <!-- Reporte por tipo de gasto -->
+      <h3 style="color: #007bff; margin-top: 30px">
+        Reporte por tipo de gasto
+      </h3>
+      <table class="reporte">
+        <tr>
+          <th>Tipo de gasto</th>
+          <th>Efectivo (COP)</th>
+          <th>Tarjeta (COP)</th>
+          <th>Total (COP)</th>
+        </tr>
+        {% for tipo, valores in gastos_por_tipo.items %}
+        <tr>
+          <td>{{ tipo }}</td>
+          <td>{{ valores.Efectivo|floatformat:0 }}</td>
+          <td>{{ valores.Tarjeta|floatformat:0 }}</td>
+          <td>{{ valores.Total|floatformat:0 }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+
+      <div class="acciones">
+        <a class="boton" href="{% url 'lista_viajes' %}"
+          >Volver a la lista de viajes</a
+        >
+        <a class="boton" href="{% url 'registrar_gasto' viaje.id %}"
+          >Agregar gasto</a
+        >
+      </div>
     </div>
   </body>
 </html>
